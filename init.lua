@@ -4,7 +4,6 @@ require("config.lsp")      -- LSP and Pyright setup
 require("config.ironrepl") -- IronREPL setup
 require("config.snippets") -- Multicursor setup
 require("config.lualine")
-require("config.strawberry")
 require("config.mason")
 require("config.multicursor")
 require("config.telescope")

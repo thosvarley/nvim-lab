@@ -1,17 +1,17 @@
 # NVim-Lab: Neovim for Scientists
 
-![Splash](images/splash.png)
+[Splash](images/splash.png)
 
 *Hint: You can read this as a markdown by running ``:MarkdownPreview`` in NVim-Lab.*
 
-NVim-Lab is a [Neovim](https://github.com/neovim/neovim) configuration and curated plugin selection designed to make Neovim an effective and efficient environment for scientists inside and outside of Academia. Nvim-Lab has utilities for coding, data analysis, and manuscript preparation, as well as supporting the three major scientific programming languages: Python, Julia, and R (it also supports Rust and Haskell, for the real nerds).
+NVim-Lab is a [Neovim](https://github.com/neovim/neovim) configuration and curated plugin selection designed to make Neovim an effective and efficient environment for scientists inside and outside of Academia. NVim-Lab has utilities for coding, data analysis, and manuscript preparation, as well as supporting the three major scientific programming languages: Python, Julia, and R (it also supports Rust and Haskell, for the real nerds).
 
 ### Features
 
-![Iron repl in action](images/ironrepl.png)
+[Iron repl in action](images/ironrepl.png) 
 
 #### Support for multiple languages 
-Using Neovim's native support for [LSP](https://github.com/neovim/nvim-lspconfig) (language-server protocol), Nvim-Lab has been configured to support: Python, Julia, R, Rust, and Haskell, as well as Lua to help with further customization and personalization. Language support includes: syntax highligting, formatting, and (light) linting. The [cmp.nvim](https://github.com/hrsh7th/nvim-cmp) plugin provides code-completion and suggestion support for all of the included languages. 
+Using Neovim's native support for [LSP](https://github.com/neovim/nvim-lspconfig) (language-server protocol), NVim-Lab has been configured to support: Python, Julia, R, Rust, and Haskell, as well as Lua to help with further customization and personalization. Language support includes: syntax highlighting, formatting, and (light) linting. The [cmp.nvim](https://github.com/hrsh7th/nvim-cmp) plugin provides code-completion and suggestion support for all of the included languages. 
 
 While I have tried to make Nvim-Lab as functional "out of the box" as possible, for the LSPs, you need to have the language servers for the respective languages already installed: 
 
@@ -52,14 +52,14 @@ Utilities are plugins that make NVim-Lab more like a fully-featured IDE.
 
 #### File Browsers
 Nvim-Lab comes with two installed file browsers: 
-* The [Telescope file browser](https://github.com/nvim-telescope/telescope-file-browser.nvim); a flat file browser (i.e. no tree-like structure) that opens in a floating window and provides a preview of the files as you navigate the directory. You can start it with the command ``:Telescope file browser`` or the keybinding ``<leader>fb`` in Normal mode. You can create new directories, files, etc, all from within neovim. When in insert mode within the browser, the ``<leader>c`` command will promt the creation of a new file or directory. 
+* The [Telescope file browser](https://github.com/nvim-telescope/telescope-file-browser.nvim); a flat file browser (i.e. no tree-like structure) that opens in a floating window and provides a preview of the files as you navigate the directory. You can start it with the command ``:Telescope file browser`` or the keybinding ``<leader>fb`` in Normal mode. You can create new directories, files, etc, all from within Neovim. When in insert mode within the browser, the ``<leader>c`` command will prompt the creation of a new file or directory. 
 * The [Oil](https://github.com/stevearc/oil.nvim) file browser is a more lightweight option that treats directories as if they were text files within the buffer. You can create, delete, rename, etc. files and directories al from within the Neovim setup. You can open it in Normal mode with the command ``:Oil .``, or with the keybinding ``-``. 
 
 #### Tmux Integration
 Nvim-Lab comes with the [Tmux Navigator](https://github.com/alexghergh/nvim-tmux-navigation) plugin, which allows for seamless integration of Neovim splits with Tmux windows. For heavy users of SSH (e.g. using remote HPC clusters), this can drastically improve the workflow. 
 
 #### Look and feel 
-NVim-Lab uses the [Catppuccin-mocha](https://catppuccin.com/) theme, although it has several others. By default, a feature is enabled that changes the background color in response to the mode Nvim is in (dark blue in normal mode, dark grey in insert mode). This is desigend to give additional sensory feedback about what mode Nvim is in. 
+NVim-Lab uses the [Catppuccin-mocha](https://catppuccin.com/) theme, although it has several others. By default, a feature is enabled that changes the background color in response to the mode Nvim is in (dark blue in normal mode, dark grey in insert mode). This is designed to give additional sensory feedback about what mode Nvim is in. 
 
 The [Lualine](https://github.com/nvim-lualine/lualine.nvim) is also included, for additional information. 
 
