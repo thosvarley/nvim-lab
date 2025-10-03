@@ -34,7 +34,7 @@ local function show_splash()
 	local lines = center_text(splash)
 	vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
 
-	vim.wo.foldenable = false 
+	vim.wo.foldenable = false
 
 	-- Optional: key mappings for quick access
 	vim.keymap.set("n", "f", "<cmd>Telescope find_files<CR>", { buffer = 0, silent = true })
