@@ -4,8 +4,8 @@ require("config.general")
 require("config.options")
 require("config.keymaps")
 
-
 require("telescope").load_extension("file_browser")
 require("nvim-tree").setup({})
+require('audacious').setup()
 
 vim.g.vimtex_quickfix_mode = 2  -- use chktex for lintin
