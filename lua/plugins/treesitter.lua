@@ -6,7 +6,7 @@ return {
 		config = function()
 			require('nvim-treesitter.configs').setup({
 				ensure_installed = {
-					"python", "r", "haskell", "julia", "rust", "lua", "bash", "markdown"
+					"python", "r", "haskell", "julia", "rust", "lua", "bash", "markdown", "c", "cpp"
 				},
 				highlight = {
 					enable = true,
