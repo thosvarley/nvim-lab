@@ -2,7 +2,7 @@
 vim.cmd("set number relativenumber")
 
 -- Colorscheme
-vim.cmd.colorscheme "kanagawa-paper"
+vim.cmd.colorscheme "gruvbox"
 
 vim.cmd("highlight LineNr guifg=#a0a0a0")
 

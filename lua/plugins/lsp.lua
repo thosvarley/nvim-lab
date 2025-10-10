@@ -10,6 +10,8 @@ return {
 			"latex",
 			"octave",
 			"haskell",
+			"c",
+			"cpp"
 		},
 		dependencies = {
 			"williamboman/mason.nvim",
@@ -102,6 +104,7 @@ return {
 				on_attach = on_attach,
 			})
 
+
 			vim.lsp.config("julials", {
 				cmd = { "julia", "--startup-file=no", "--history-file=no", "-e", [[
 					using LanguageServer
@@ -114,6 +117,31 @@ return {
 					exit_timeout = 5000,
 				},
 			})
+			
+			vim.lsp.config("clangd", {
+				cmd = { "clangd", "--background-index", "--clang-tidy", "--log=verbose" },
+				init_options = {
+					clangdFileStatus = true,
+					clangdSemanticHighlighting = true
+				},
+				filetypes = { "c", "cpp", "cxx", "cc", "h", "hpp", "objc", "objcpp", "cuda" },
+				root_markers = {
+				    '.clangd',
+				    '.clang-tidy',
+				    '.clang-format',
+				    'compile_commands.json',
+				    'compile_flags.txt',
+				    'configure.ac', -- AutoTools
+				    '.git',
+				},
+				capabilities = capabilities,
+				on_attach = on_attach,
+				settings = {
+					['clangd'] = {
+					    ['compilationDatabasePath'] = 'cmake'
+					}
+			  	}
+			})
 
 			-- Setup Mason LSPConfig to ensure servers are installed
 			-- Note: julials is NOT in ensure_installed because we configure it manually
@@ -124,7 +152,8 @@ return {
 					"rust_analyzer",
 					"texlab",
 					"hls",
-					"r_language_server"
+					"r_language_server",
+					"clangd"
 				},
 			})
 
@@ -136,7 +165,8 @@ return {
 				"texlab",
 				"hls",
 				"r_language_server",
-				"julials"
+				"julials",
+				"clangd"
 			})
 		end,
 	},

@@ -45,3 +45,7 @@ vim.keymap.set("n", "<localleader>e", ":MoltenEvaluateOperator<CR>", { silent = 
 vim.keymap.set("n", "<localleader>rl", ":MoltenEvaluateLine<CR>", { silent = true, desc = "Evaluate line" })
 vim.keymap.set("v", "<localleader>r", ":<C-u>MoltenEvaluateVisual<CR>gv", { silent = true, desc = "Evaluate visual" })
 vim.keymap.set("n", "<localleader>r", "vip:MoltenEvaluateVisual<CR>", { silent = true, desc = "Evaluate cell" })
+
+-- Keybinding for changing background color (works well with gruvbox color scheme)
+vim.keymap.set('n',  '<leader>bd', ':set background=dark<enter>')
+vim.keymap.set('n',  '<leader>bl', ':set background=light<enter>')
