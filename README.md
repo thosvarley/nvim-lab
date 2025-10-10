@@ -122,6 +122,7 @@ Nvim-lab has built-in LSP support for the following languages:
 - Haskell: Full LSP support.
 - Lua: Lightweight scripting language, used within Neovim itself.
 - LaTeX: LaTeX support and compilation provided by VimTex.
+- C/C++: LSP support provided by [clangd](https://clangd.llvm.org/). 
 
 ### Future work
 We welcome contributions to improve nvim-lab! Whether it's fixing bugs, improving documentation, or adding new features, your help is greatly appreciated.
