@@ -17,6 +17,7 @@ return {
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 			"hrsh7th/cmp-nvim-lsp", -- 👈 required for completion capabilities
+			"nvimtools/none-ls.nvim"
 		},
 		config = function()
 			-- Setup Mason
@@ -167,6 +168,23 @@ return {
 				"r_language_server",
 				"julials",
 				"clangd"
+			})
+
+			-- ✨ Add MyPy diagnostics via none-ls
+			local null_ls = require("null-ls")
+
+			null_ls.setup({
+				sources = {
+					null_ls.builtins.diagnostics.mypy.with({
+						extra_args = {
+							"--ignore-missing-imports",
+							"--check-untyped-defs",
+							"--follow-imports=silent",
+							"--strict",
+						},
+					}),
+				},
+				on_attach = on_attach,
 			})
 		end,
 	},

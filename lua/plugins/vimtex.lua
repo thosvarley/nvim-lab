@@ -8,6 +8,7 @@ return {
 			-- vimtex settings
 			vim.g.vimtex_view_method = "zathura" -- set Zathura as the PDF viewer
 			vim.g.tex_compiler_method = "latexmk" -- use latexmk to compile LaTeX files
+			
 			vim.cmd([[
 				    let g:vimtex_compiler_latexmk = {
 					\ 'executable' : 'latexmk',
@@ -15,7 +16,7 @@ return {
 					\ 'out_dir' : './'
 					\}
 				]])
-			
+
 
 			-- Forward search configuration
 			vim.g.vimtex_view_forward_search_on_start = true

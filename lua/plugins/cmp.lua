@@ -1,4 +1,4 @@
-return { 
+return {
 	{
 		"hrsh7th/nvim-cmp",
 		dependencies = {
@@ -20,6 +20,10 @@ return {
 					end,
 				},
 				mapping = cmp.mapping.preset.insert({
+					-- ["<C-d>"] = cmp.mapping.open_docs(),
+					-- ["<C-c>"] = cmp.mapping.close_docs(),
+					["<C-f>"] = cmp.mapping.scroll_docs(4), -- Scroll down
+					["<C-b>"] = cmp.mapping.scroll_docs(-4), -- Scroll up
 					["<Tab>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
 							cmp.select_next_item()
@@ -45,6 +49,18 @@ return {
 					{ name = "buffer" },
 					{ name = "path" },
 				}),
+				window = {
+					completion = cmp.config.window.bordered({}),
+					documentation = cmp.config.window.bordered({}),
+				},
+				view = {
+					docs = {
+						auto_open = true, -- Disable auto-opening
+					},
+				},
+				experimental = {
+					ghost_text = false, -- optional: shows preview as ghost text
+				},
 			})
 		end,
 	}
