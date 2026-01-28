@@ -1,21 +1,20 @@
 return {
 	{
 		"danymat/neogen",
+		lazy = true,
+		cmd = "Neogen",
 		config = function()
-			require('neogen').setup {
+			require("neogen").setup({
 				enabled = true,
 				languages = {
 					python = {
 						template = {
-							annotation_convention = "numpydoc"
-						}
+							annotation_convention = "numpydoc",
+						},
 					},
-				}
-			}
-		end
-
-		-- Uncomment next line if you want to follow only stable versions
-		-- version = "*"
-
-	}
+				},
+			})
+		end,
+	},
 }
+

@@ -1,31 +1,32 @@
--- Various navigation utilities
+
+-- FILE BROWSERS
 -- Open Oil in current directory.
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open Oil in current directory" })
-
--- Toggle NvimTree 
-vim.keymap.set("n", "<leader>e", "<CMD>NvimTreeToggle<CR>", { desc = "Toggle File Explorer (nvim-tree)" })
-
+-- Open Mini.Files browser.
+vim.keymap.set("n", "<Leader>mf", function()
+	MiniFiles.open()
+end, { desc = "Open Mini.Files" })
 -- Open Telescope file browser
 vim.keymap.set("n", "<leader>fb", "<CMD>Telescope file_browser<CR>", { desc = "Toggle Nvim Tree Sidebar" })
 
--- Keybinding to format the file.
-vim.keymap.set('n', '<leader>fmt',
-	'<cmd>lua vim.lsp.buf.format()<CR>:lua vim.notify("File formatted successfully!")<CR>',
-	{ noremap = true, silent = true }
-)
+-- Neogen docstrings
+vim.keymap.set("n", "<Leader>ng", "<CMD>Neogen<CR>", { desc = "Generate Neogen docstring" })
 
 -- Iron-specific keybindings
-vim.keymap.set('n', '<leader>xx', '<cmd>IronRunCurrent<cr>')
-vim.keymap.set('n', '<leader>xc', '<cmd>IronRunCell<cr>')
+vim.keymap.set('n', '<leader>xx', '<cmd>IronRunCurrent<cr>', { desc = "Run current file in REPL" })
+vim.keymap.set('n', '<leader>xc', '<cmd>IronRunCell<cr>', { desc = "Run current cell in REPL" })
 
+-- Terminal keymaps
 vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]]) -- Keybinding for escaping terminal mode
+vim.keymap.set("n", "<leader>T", "<cmd>vsplit | terminal<cr>", { desc = "Vertical terminal" })
+vim.keymap.set("n", "<leader>t", "<cmd>split | terminal<cr>", { desc = "Horizontal terminal" })
 
+-- Documentation and hints 
 -- Keybinding for going to definition
---vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', 'gd', function()
 	vim.cmd('vsplit') -- Opens a vertical split
 	vim.lsp.buf.definition()
-end, { noremap = true, silent = true })
+end, { desc = "Open definition in new pane", noremap = true, silent = true })
 
 -- Keybinding for showing hover documentation
 vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', { noremap = true, silent = true })
@@ -39,13 +40,11 @@ vim.keymap.set('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<CR>', { noremap 
 -- Show all diagnostics in the current buffer
 vim.keymap.set('n', '<leader>dl', '<cmd>lua vim.diagnostic.setloclist()<CR>', { noremap = true, silent = true })
 
--- Molten Keymaps
-vim.keymap.set("n", "<localleader>mi", ":MoltenInit<CR>", { silent = true, desc = "Initialize Molten" })
-vim.keymap.set("n", "<localleader>e", ":MoltenEvaluateOperator<CR>", { silent = true, desc = "Evaluate operator" })
-vim.keymap.set("n", "<localleader>rl", ":MoltenEvaluateLine<CR>", { silent = true, desc = "Evaluate line" })
-vim.keymap.set("v", "<localleader>r", ":<C-u>MoltenEvaluateVisual<CR>gv", { silent = true, desc = "Evaluate visual" })
-vim.keymap.set("n", "<localleader>r", "vip:MoltenEvaluateVisual<CR>", { silent = true, desc = "Evaluate cell" })
 
 -- Keybinding for changing background color (works well with gruvbox color scheme)
 vim.keymap.set('n',  '<leader>bd', ':set background=dark<enter>')
 vim.keymap.set('n',  '<leader>bl', ':set background=light<enter>')
+
+-- Tab to navigate completion menu
+vim.keymap.set('i', '<Tab>', [[pumvisible() ? "\<C-n>" : "\<Tab>"]], { expr = true })
+vim.keymap.set('i', '<S-Tab>', [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]], { expr = true })
