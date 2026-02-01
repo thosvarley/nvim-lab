@@ -1,6 +1,7 @@
 return {
 	"Vigemus/iron.nvim",
 	lazy = true,
+	cmd = { "IronRunCurrent", "IronRunCell" },
 	keys = {
 		{
 			"<Leader>rh",

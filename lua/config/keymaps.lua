@@ -45,6 +45,7 @@ vim.keymap.set('n', '<leader>dl', '<cmd>lua vim.diagnostic.setloclist()<CR>', { 
 vim.keymap.set('n',  '<leader>bd', ':set background=dark<enter>')
 vim.keymap.set('n',  '<leader>bl', ':set background=light<enter>')
 
+
 -- Tab to navigate completion menu
 vim.keymap.set('i', '<Tab>', [[pumvisible() ? "\<C-n>" : "\<Tab>"]], { expr = true })
 vim.keymap.set('i', '<S-Tab>', [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]], { expr = true })

@@ -1,3 +1,5 @@
+vim.cmd("set wrap")
+
 -- Simultanious absoute and relative line numbering.
 vim.cmd("set number relativenumber")
 
