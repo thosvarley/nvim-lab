@@ -13,12 +13,7 @@ return {
 				{ mode = "n", keys = "`" },
 			},
 		})
-		require("mini.completion").setup({
-			window = {
-				info = { border = "rounded" },
-				signature = { border = "rounded" },
-			},
-		})
+		require("mini.completion").setup()
 		require("mini.comment").setup()
 		require("mini.files").setup()
 		require("mini.fuzzy").setup()

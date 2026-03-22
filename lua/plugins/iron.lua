@@ -102,5 +102,11 @@ return {
 
 			require("iron.core").send(nil, cell_lines)
 		end, {})
+		vim.api.nvim_create_autocmd("FileType", {
+			pattern = "iron",
+			callback = function()
+				vim.wo.winfixbuf = true
+			end,
+		})
 	end,
 }
