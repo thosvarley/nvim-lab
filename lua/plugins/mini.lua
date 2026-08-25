@@ -24,5 +24,17 @@ return {
 		require("mini.snippets").setup()
 		require("mini.surround").setup()
 		require("mini.tabline").setup()
+
+		-- An active snippet session leaves a "." /"∎" virtual-text marker on
+		-- unvisited tabstops (e.g. the final $0 after a function call's
+		-- closing paren) until the session is stopped; nothing here jumps
+		-- through tabstops, so stop the session on InsertLeave instead.
+		vim.api.nvim_create_autocmd("InsertLeave", {
+			callback = function()
+				if MiniSnippets.session.get() ~= nil then
+					MiniSnippets.session.stop()
+				end
+			end,
+		})
 	end,
 }

@@ -49,3 +49,12 @@ vim.keymap.set('n',  '<leader>bl', ':set background=light<enter>')
 -- Tab to navigate completion menu
 vim.keymap.set('i', '<Tab>', [[pumvisible() ? "\<C-n>" : "\<Tab>"]], { expr = true })
 vim.keymap.set('i', '<S-Tab>', [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]], { expr = true })
+-- Confirm the selected completion item (mini.completion only swaps in the
+-- real insert/snippet text on explicit confirm; without this, Tab-selecting
+-- and continuing to type leaves the item's raw label in the buffer).
+vim.keymap.set('i', '<CR>', function()
+	if vim.fn.complete_info()['selected'] ~= -1 then
+		return '\25' -- <C-y>, accept selected item
+	end
+	return '\r'
+end, { expr = true })

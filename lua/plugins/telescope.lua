@@ -3,11 +3,15 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
-		defaults = {
-			generic_sorter = require("mini.fuzzy").get_telescope_sorter,
-		},
 		cmd = "Telescope",
-		lazy = true
+		lazy = true,
+		config = function()
+			require("telescope").setup({
+				defaults = {
+					generic_sorter = require("mini.fuzzy").get_telescope_sorter,
+				},
+			})
+		end,
 	},
 	{
 		"nvim-telescope/telescope-file-browser.nvim",
@@ -16,6 +20,7 @@ return {
 	},
 	{
 		"nvim-telescope/telescope-bibtex.nvim",
+		cmd = "Telescope bibtex",
 		config = function()
 			require("telescope").load_extension("bibtex")
 		end,

@@ -6,8 +6,6 @@ vim.opt.foldlevel = 99 -- Or a lower number to start with folds closed
 -- Simultanious absoute and relative line numbering.
 vim.cmd("set number relativenumber")
 
-vim.o.lazyredraw = true
-
 -- Colorscheme
 vim.cmd.colorscheme "kanagawa-paper"
 

@@ -10,13 +10,13 @@ return {
 			end,
 			desc = "Send line to REPL",
 		},
-		-- add other iron keymaps here
 		{
 			"<Leader>rv",
 			function()
-				require("iron.core").send_line()
+				require("iron.core").visual_send()
 			end,
-			desc = "Send line to REPL",
+			mode = "v",
+			desc = "Send visual selection to REPL",
 		},
 	},
 	config = function()
@@ -35,7 +35,7 @@ return {
 					},
 					r = {
 						command = { "R" },
-						block_divides = { "# %%", "#%%" },
+						block_dividers = { "# %%", "#%%" },
 					},
 					haskell = {
 						command = { "ghci" },
