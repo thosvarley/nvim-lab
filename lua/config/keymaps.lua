@@ -7,7 +7,7 @@ vim.keymap.set("n", "<Leader>mf", function()
 	MiniFiles.open()
 end, { desc = "Open Mini.Files" })
 -- Open Telescope file browser
-vim.keymap.set("n", "<leader>fb", "<CMD>Telescope file_browser<CR>", { desc = "Toggle Nvim Tree Sidebar" })
+vim.keymap.set("n", "<leader>fb", "<CMD>Telescope file_browser<CR>", { desc = "Open Telescope file browser" })
 
 -- Neogen docstrings
 vim.keymap.set("n", "<Leader>ng", "<CMD>Neogen<CR>", { desc = "Generate Neogen docstring" })
@@ -46,9 +46,28 @@ vim.keymap.set('n',  '<leader>bd', ':set background=dark<enter>')
 vim.keymap.set('n',  '<leader>bl', ':set background=light<enter>')
 
 
--- Tab to navigate completion menu
-vim.keymap.set('i', '<Tab>', [[pumvisible() ? "\<C-n>" : "\<Tab>"]], { expr = true })
-vim.keymap.set('i', '<S-Tab>', [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]], { expr = true })
+-- Tab: cycle the completion popup, else jump to the next snippet tabstop
+-- (e.g. between a function call's arguments), else insert a literal tab.
+vim.keymap.set('i', '<Tab>', function()
+	if vim.fn.pumvisible() == 1 then
+		return vim.api.nvim_replace_termcodes('<C-n>', true, true, true)
+	end
+	if MiniSnippets.session.get() ~= nil then
+		MiniSnippets.session.jump('next')
+		return ''
+	end
+	return vim.api.nvim_replace_termcodes('<Tab>', true, true, true)
+end, { expr = true })
+vim.keymap.set('i', '<S-Tab>', function()
+	if vim.fn.pumvisible() == 1 then
+		return vim.api.nvim_replace_termcodes('<C-p>', true, true, true)
+	end
+	if MiniSnippets.session.get() ~= nil then
+		MiniSnippets.session.jump('prev')
+		return ''
+	end
+	return vim.api.nvim_replace_termcodes('<S-Tab>', true, true, true)
+end, { expr = true })
 -- Confirm the selected completion item (mini.completion only swaps in the
 -- real insert/snippet text on explicit confirm; without this, Tab-selecting
 -- and continuing to type leaves the item's raw label in the buffer).

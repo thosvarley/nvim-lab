@@ -6,7 +6,6 @@ return {
 		"r",
 		"julia",
 		"rust",
-		"lua",
 		"tex",
 		"haskell",
 		"c",
