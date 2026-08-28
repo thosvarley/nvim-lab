@@ -17,6 +17,41 @@ return {
 		-- Function that tells us when LSP is attached.
 		local on_attach = function(client, bufnr)
 			vim.notify("LSP attached: " .. client.name, vim.log.levels.INFO)
+
+			-- Work around a mini.completion bug (completion.lua:1712).
+			-- It picks an active parameter via
+			-- `signature.activeParameter or response.activeParameter or 0`,
+			-- but JSON `null` decodes to the userdata sentinel `vim.NIL`
+			-- (not Lua nil) -- which is truthy, so it wins the `or` chain
+			-- instead of falling through to 0, and then gets compared
+			-- against a number and crashes. jedi-language-server sends an
+			-- explicit `null` here for signatures it can't pin an active
+			-- parameter for (e.g. numpy.ix_, a *args-taking callable
+			-- class rather than a plain def). Strip vim.NIL out of
+			-- signatureHelp responses before mini.completion sees them.
+			local orig_request = client.request
+			client.request = function(self, method, params, handler, ...)
+				if method == "textDocument/signatureHelp" and handler then
+					local orig_handler = handler
+					handler = function(err, result, ctx, config)
+						if result then
+							if result.activeParameter == vim.NIL then
+								result.activeParameter = nil
+							end
+							if result.activeSignature == vim.NIL then
+								result.activeSignature = nil
+							end
+							for _, sig in ipairs(result.signatures or {}) do
+								if sig.activeParameter == vim.NIL then
+									sig.activeParameter = nil
+								end
+							end
+						end
+						return orig_handler(err, result, ctx, config)
+					end
+				end
+				return orig_request(self, method, params, handler, ...)
+			end
 		end
 
 		-- Python
