@@ -22,4 +22,7 @@ return {
 	-- Optional languages (disabled by default)
 	haskell = true,
 	octave = false,
+
+	-- Nix for NixOS
+	nix = true,
 }

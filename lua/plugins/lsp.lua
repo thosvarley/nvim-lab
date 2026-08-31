@@ -1,6 +1,7 @@
 return {
 	"neovim/nvim-lspconfig",
 	ft = {
+		"nix",
 		"python",
 		"lua",
 		"r",
@@ -53,7 +54,17 @@ return {
 				return orig_request(self, method, params, handler, ...)
 			end
 		end
-
+		
+		-- Nix
+                if languages.nix then
+                        vim.lsp.config("nixd", {
+                                cmd = { "nixd" },
+				root_markers = { "flake.nix", ".git" },
+                                on_attach = on_attach,
+                                filetypes = { "nix" },
+                        })
+                        vim.lsp.enable("nixd")
+                end
 		-- Python
 		if languages.python then
 			vim.lsp.config("jedi_language_server", {

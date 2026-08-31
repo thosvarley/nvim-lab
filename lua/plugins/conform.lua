@@ -16,6 +16,10 @@ return {
 		
 		local formatters_by_ft = {}
 
+		if languages.nix then
+			formatters_by_ft.nix = { "nixfmt" }
+		end
+
 		if languages.lua then
 			formatters_by_ft.lua = { "stylua" }
 		end
