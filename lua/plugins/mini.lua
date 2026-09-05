@@ -15,7 +15,6 @@ return {
 		})
 		require("mini.completion").setup()
 		require("mini.comment").setup()
-		require("mini.files").setup()
 		require("mini.fuzzy").setup()
 		require("mini.git").setup()
 		require("mini.icons").setup()

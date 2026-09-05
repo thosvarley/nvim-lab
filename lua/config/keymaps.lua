@@ -2,10 +2,6 @@
 -- FILE BROWSERS
 -- Open Oil in current directory.
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open Oil in current directory" })
--- Open Mini.Files browser.
-vim.keymap.set("n", "<Leader>mf", function()
-	MiniFiles.open()
-end, { desc = "Open Mini.Files" })
 -- Open Telescope file browser
 vim.keymap.set("n", "<leader>fb", "<CMD>Telescope file_browser<CR>", { desc = "Open Telescope file browser" })
 
