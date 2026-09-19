@@ -9,8 +9,21 @@ vim.keymap.set("n", "<leader>fb", "<CMD>Telescope file_browser<CR>", { desc = "O
 vim.keymap.set("n", "<Leader>ng", "<CMD>Neogen<CR>", { desc = "Generate Neogen docstring" })
 
 -- Iron-specific keybindings
-vim.keymap.set('n', '<leader>xx', '<cmd>IronRunCurrent<cr>', { desc = "Run current file in REPL" })
 vim.keymap.set('n', '<leader>xc', '<cmd>IronRunCell<cr>', { desc = "Run current cell in REPL" })
+
+-- Filetype-specific <leader>xx
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "python",
+	callback = function(args)
+		vim.keymap.set('n', '<leader>xx', '<cmd>IronRunCurrent<cr>', { buffer = args.buf, desc = "Run current file in REPL" })
+	end,
+})
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "tex",
+	callback = function(args)
+		vim.keymap.set('n', '<leader>xx', '<cmd>wa<cr>', { buffer = args.buf, desc = "Save all" })
+	end,
+})
 
 -- Terminal keymaps
 vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]]) -- Keybinding for escaping terminal mode
