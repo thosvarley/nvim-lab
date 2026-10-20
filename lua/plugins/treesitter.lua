@@ -1,26 +1,32 @@
+local parsers = {
+	"python",
+	"r",
+	"haskell",
+	"julia",
+	"rust",
+	"lua",
+	"bash",
+	"markdown",
+	"c",
+	"cpp",
+}
+
 return {
 	"nvim-treesitter/nvim-treesitter",
+	branch = "main",
 	lazy = false,
 	build = ":TSUpdate",
 	config = function()
-		require("nvim-treesitter").setup({
-			ensure_installed = {
-				"python",
-				"r",
-				"haskell",
-				"julia",
-				"rust",
-				"lua",
-				"bash",
-				"markdown",
-				"c",
-				"cpp",
-			},
-			highlight = {
-				enable = true,
-				additional_vim_regex_highlighting = false, -- don't run both
-			},
-			indent = { enable = true },
+		-- The main branch's setup() no longer takes ensure_installed/highlight/indent
+		require("nvim-treesitter").install(parsers)
+
+		vim.api.nvim_create_autocmd("FileType", {
+			callback = function(args)
+				local lang = vim.treesitter.language.get_lang(args.match)
+				if lang and pcall(vim.treesitter.start, args.buf, lang) then
+					vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+				end
+			end,
 		})
 	end,
 }

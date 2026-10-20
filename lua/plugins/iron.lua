@@ -26,7 +26,17 @@ return {
 				scratch_repl = true,
 				repl_definition = {
 					python = {
-						command = { "ipython", "-i", "-c", "import matplotlib.pyplot as plt; plt.ion()" },
+						-- profile_iron (~/.ipython/profile_iron) is the only place
+						-- the qt matplotlib backend is set, so floating figure
+						-- windows stay scoped to this REPL and don't leak into
+						-- Jupyter notebooks, which load profile_default.
+						command = {
+							"ipython",
+							"--profile=iron",
+							"-i",
+							"-c",
+							"import matplotlib.pyplot as plt; plt.ion()",
+						},
 						format = require("iron.fts.common").bracketed_paste,
 						block_dividers = { "# %%", "#%%" },
 					},
