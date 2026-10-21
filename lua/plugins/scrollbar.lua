@@ -1,6 +1,7 @@
 return {
 	"petertriho/nvim-scrollbar",
 	lazy = false,
+	branch = "v1",
 	-- 1. Add the dependencies so Neovim actually installs hlslens and gitsigns
 	dependencies = {
 		"lewis6991/gitsigns.nvim",
