@@ -10,8 +10,7 @@ return {
 			}
 		},
 		cmd = "Oil",
-		-- Optional dependencies
-		dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
+		-- Icons come from mini.icons (set up in mini.lua), which oil prefers.
 		lazy = true,
 	},
 }

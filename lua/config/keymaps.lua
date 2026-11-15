@@ -37,20 +37,19 @@ vim.keymap.set('n', 'gd', function()
 	vim.lsp.buf.definition()
 end, { desc = "Open definition in new pane", noremap = true, silent = true })
 
--- Keybinding for showing hover documentation
-vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', { noremap = true, silent = true })
+-- Hover documentation is Neovim's built-in `K` mapping.
 
 -- Go to the next diagnostic (error, warning, etc.)
-vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', ']d', function() vim.diagnostic.jump({ count = 1, float = true }) end, { silent = true })
 -- Go to the previous diagnostic (error, warning, etc.)
-vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '[d', function() vim.diagnostic.jump({ count = -1, float = true }) end, { silent = true })
 -- Show diagnostics for the current line (popup window)
 vim.keymap.set('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<CR>', { noremap = true, silent = true })
 -- Show all diagnostics in the current buffer
 vim.keymap.set('n', '<leader>dl', '<cmd>lua vim.diagnostic.setloclist()<CR>', { noremap = true, silent = true })
 
 
--- Keybinding for changing background color (works well with gruvbox color scheme)
+-- Toggle light/dark background (kanagawa-paper has both variants)
 vim.keymap.set('n',  '<leader>bd', ':set background=dark<enter>')
 vim.keymap.set('n',  '<leader>bl', ':set background=light<enter>')
 
@@ -80,9 +79,10 @@ end, { expr = true })
 -- Confirm the selected completion item (mini.completion only swaps in the
 -- real insert/snippet text on explicit confirm; without this, Tab-selecting
 -- and continuing to type leaves the item's raw label in the buffer).
+-- Otherwise defer to mini.pairs, so `{|}` + Enter still splits the pair.
 vim.keymap.set('i', '<CR>', function()
-	if vim.fn.complete_info()['selected'] ~= -1 then
+	if vim.fn.complete_info({ 'selected' }).selected ~= -1 then
 		return '\25' -- <C-y>, accept selected item
 	end
-	return '\r'
-end, { expr = true })
+	return MiniPairs.cr()
+end, { expr = true, replace_keycodes = false })

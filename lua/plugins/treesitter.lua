@@ -7,8 +7,15 @@ local parsers = {
 	"lua",
 	"bash",
 	"markdown",
+	"markdown_inline", -- inline markdown (code spans, links, emphasis)
 	"c",
 	"cpp",
+	"nix",
+	"vim",
+	"vimdoc",
+	"query",
+	-- No `latex`: VimTeX's own syntax handles .tex (its math-zone detection
+	-- and motions depend on it), so tree-sitter isn't used there.
 }
 
 return {

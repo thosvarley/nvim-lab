@@ -1,8 +1,8 @@
 -- File: lua/config/splash.lua
 local function center_text(lines)
-	local width = vim.api.nvim_get_option("columns")
+	local width = vim.o.columns
 	return vim.tbl_map(function(line)
-		local padding = math.floor((width - #line) / 2)
+		local padding = math.floor((width - vim.fn.strdisplaywidth(line)) / 2)
 		return string.rep(" ", math.max(padding, 0)) .. line
 	end, lines)
 end

@@ -20,6 +20,9 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
+-- Disable netrw so yazi.nvim (open_for_directories) handles `nvim <dir>`.
+vim.g.loaded_netrwPlugin = 1
+
 -- Setup lazy.nvim
 require("lazy").setup({
 	spec = {
@@ -28,7 +31,7 @@ require("lazy").setup({
 	},
 	-- Configure any other settings here. See the documentation for more details.
 	-- colorscheme that will be used when installing plugins.
-	install = { colorscheme = { "kanawaga-paper" } },
+	install = { colorscheme = { "kanagawa-paper" } },
 	-- automatically check for plugin updates
 	checker = { enabled = true },
 })

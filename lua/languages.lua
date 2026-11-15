@@ -19,7 +19,7 @@ return {
 	-- Neovim configuration
 	lua = true,
 
-	-- Optional languages (disabled by default)
+	-- Optional languages
 	haskell = true,
 	octave = false,
 

@@ -21,13 +21,26 @@ M.check = function()
 	-- ── Requirements ──────────────────────────────────────────────────────────
 	start("nvim-lab: requirements")
 
-	if vim.fn.has("nvim-0.11") == 1 then
-		ok("Neovim >= 0.11")
+	-- nvim-treesitter's `main` branch requires 0.12.
+	if vim.fn.has("nvim-0.12") == 1 then
+		ok("Neovim >= 0.12")
 	else
-		error("Neovim >= 0.11 required", { "Update Neovim: https://github.com/neovim/neovim/releases" })
+		error("Neovim >= 0.12 required", { "Update Neovim: https://github.com/neovim/neovim/releases" })
 	end
 
 	check("git", "git", "Install git via your system package manager", true)
+	check(
+		"tree-sitter",
+		"tree-sitter CLI (nvim-treesitter parser builds)",
+		"cargo install --locked tree-sitter-cli, or your system package manager",
+		true
+	)
+
+	-- ── Tools ─────────────────────────────────────────────────────────────────
+	start("nvim-lab: tools")
+	check("rg", "ripgrep (Telescope live_grep)", "Install ripgrep via your system package manager", false)
+	check("yazi", "yazi (yazi.nvim file manager)", "See https://yazi-rs.github.io/docs/installation", false)
+	check("claude", "claude (claude-code.nvim)", "See https://docs.claude.com/en/docs/claude-code", false)
 
 	-- ── Python ────────────────────────────────────────────────────────────────
 	if languages.python then
@@ -35,12 +48,12 @@ M.check = function()
 		check(
 			"jedi-language-server",
 			"jedi-language-server (LSP)",
-			"pip install jedi-language-server — ensure your venv is active when nvim starts"
+			"uv tool install jedi-language-server (or pipx) — ensure your venv is active when nvim starts"
 		)
 		check(
 			"ruff",
 			"ruff (LSP + formatter)",
-			"pip install ruff — ensure your venv is active when nvim starts"
+			"uv tool install ruff (or pipx) — ensure your venv is active when nvim starts"
 		)
 		check(
 			"ipython",
@@ -60,7 +73,7 @@ M.check = function()
 		check(
 			"stylua",
 			"stylua (formatter)",
-			"cargo install stylua"
+			"cargo install --locked stylua"
 		)
 	end
 
@@ -155,7 +168,33 @@ M.check = function()
 		check(
 			"tex-fmt",
 			"tex-fmt (formatter)",
-			"cargo install tex-fmt"
+			"cargo install --locked tex-fmt"
+		)
+		check(
+			"latexmk",
+			"latexmk (VimTeX compiler)",
+			"Install latexmk via your TeX distribution or system package manager"
+		)
+		check(
+			"zathura",
+			"zathura (VimTeX viewer)",
+			"Install zathura via your system package manager",
+			false
+		)
+	end
+
+	-- ── Nix ───────────────────────────────────────────────────────────────────
+	if languages.nix then
+		start("nvim-lab: Nix")
+		check(
+			"nixd",
+			"nixd (LSP)",
+			"Add nixd to environment.systemPackages, or: nix profile install nixpkgs#nixd"
+		)
+		check(
+			"nixfmt",
+			"nixfmt (formatter)",
+			"Add nixfmt to environment.systemPackages, or: nix profile install nixpkgs#nixfmt"
 		)
 	end
 
@@ -185,7 +224,7 @@ M.check = function()
 		check(
 			"mh_style",
 			"mh_style (formatter)",
-			"pip install miss-hit"
+			"uv tool install miss-hit (or pipx)"
 		)
 	end
 end

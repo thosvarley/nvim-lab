@@ -1,23 +1,27 @@
 return {
 	"Vigemus/iron.nvim",
 	lazy = true,
-	cmd = { "IronRunCurrent", "IronRunCell" },
+	cmd = { "IronRunCurrent", "IronRunCell", "IronFocus", "IronRepl" },
 	keys = {
 		{
-			"<Leader>rh",
+			"<Leader>sl",
 			function()
 				require("iron.core").send_line()
 			end,
 			desc = "Send line to REPL",
 		},
 		{
-			"<Leader>rv",
+			"<Leader>sc",
 			function()
 				require("iron.core").visual_send()
 			end,
 			mode = "v",
 			desc = "Send visual selection to REPL",
 		},
+		-- Load triggers only: iron's setup below binds these keys itself.
+		{ "<Leader>rr", desc = "Toggle REPL" },
+		{ "<Leader>rh", desc = "Toggle REPL (horizontal split)" },
+		{ "<Leader>rv", desc = "Toggle REPL (vertical split)" },
 	},
 	config = function()
 		local view = require("iron.view")
@@ -54,7 +58,7 @@ return {
 						command = { "lua" },
 					},
 					octave = {
-						command = { "octave " },
+						command = { "octave" },
 					},
 				},
 				repl_open_cmd = {

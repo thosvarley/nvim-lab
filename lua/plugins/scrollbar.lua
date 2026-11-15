@@ -2,24 +2,18 @@ return {
 	"petertriho/nvim-scrollbar",
 	lazy = false,
 	branch = "v1",
-	-- 1. Add the dependencies so Neovim actually installs hlslens and gitsigns
 	dependencies = {
 		"lewis6991/gitsigns.nvim",
 		"kevinhwang91/nvim-hlslens",
 	},
 	config = function()
-		-- 2. Setup your dependencies first
 		require("gitsigns").setup()
+		-- Search marks go to the scrollbar only; no inline [n/m] lens boxes.
+		-- (scrollbar's search handler hooks hlslens' build_position_cb itself.)
 		require("hlslens").setup({
-			-- Keep the scrollbar pipeline active
-			build_position_cb = function(plist, _, _, _)
-				require("scrollbar.handlers.search").handler.show(plist.start_pos)
-			end,
-			-- DISABLE the inline bracket boxes in your code lines
 			enable_virt_text = false,
 			override_lens = function() end,
 		})
-		-- 3. Core scrollbar configuration
 		require("scrollbar").setup({
 			show = true,
 			show_in_active_only = false,
@@ -55,13 +49,6 @@ return {
 			},
 			excluded_buftypes = { "terminal" },
 			excluded_filetypes = {
-				"blink-cmp-menu",
-				"dropbar_menu",
-				"dropbar_menu_fzf",
-				"DressingInput",
-				"cmp_docs",
-				"cmp_menu",
-				"noice",
 				"prompt",
 				"TelescopePrompt",
 			},
@@ -80,16 +67,12 @@ return {
 			},
 			handlers = {
 				cursor = true,
-				diagnostic = true, -- Native LSP Diagnostics should work instantly now
-				gitsigns = true, -- FIXED: Set to true to allow git markers
+				diagnostic = true,
+				gitsigns = true, -- also sets up the gitsigns handler
 				handle = true,
-				search = true, -- FIXED: Set to true to allow search markers
+				search = true, -- also sets up the hlslens handler
 				ale = false,
 			},
 		})
-
-		-- 4. CRITICAL: Initialize the scrollbar-specific handlers so they fetch the data
-		require("scrollbar.handlers.gitsigns").setup()
-		require("scrollbar.handlers.search").setup()
 	end,
 }

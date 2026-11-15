@@ -18,6 +18,8 @@ return {
 		require("mini.fuzzy").setup()
 		require("mini.git").setup()
 		require("mini.icons").setup()
+		-- Serve icons to plugins that ask for nvim-web-devicons (telescope, etc.)
+		MiniIcons.mock_nvim_web_devicons()
 		require("mini.notify").setup()
 		require("mini.statusline").setup()
 		require("mini.snippets").setup()
@@ -26,8 +28,9 @@ return {
 
 		-- An active snippet session leaves a "." /"∎" virtual-text marker on
 		-- unvisited tabstops (e.g. the final $0 after a function call's
-		-- closing paren) until the session is stopped; nothing here jumps
-		-- through tabstops, so stop the session on InsertLeave instead.
+		-- closing paren) until the session is stopped. <Tab>/<S-Tab> in
+		-- keymaps.lua jump between tabstops while typing; once you leave
+		-- insert mode, stop the session so leftover markers are cleared.
 		vim.api.nvim_create_autocmd("InsertLeave", {
 			callback = function()
 				if MiniSnippets.session.get() ~= nil then

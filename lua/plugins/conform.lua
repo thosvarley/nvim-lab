@@ -10,7 +10,6 @@ return {
 			desc = "Format buffer",
 		},
 	},
-	opts = {},
 	config = function()
 		local languages = require("languages")
 		
